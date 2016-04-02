@@ -1,0 +1,121 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myEmployeeLabel">Create or edit a Employee</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.employee.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_employeeIdExternal">EmployeeIdExternal</label>
+            <input type="number" class="form-control" name="employeeIdExternal" id="field_employeeIdExternal"
+                    ng-model="vm.employee.employeeIdExternal"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_firstName">FirstName</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                    ng-model="vm.employee.firstName"
+                    required />
+            <div ng-show="editForm.firstName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.firstName.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastName">LastName</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                    ng-model="vm.employee.lastName"
+                    required />
+            <div ng-show="editForm.lastName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.lastName.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                    ng-model="vm.employee.email"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_phoneNumber">PhoneNumber</label>
+            <input type="number" class="form-control" name="phoneNumber" id="field_phoneNumber"
+                    ng-model="vm.employee.phoneNumber"
+                    min="8" max="8" />
+            <div ng-show="editForm.phoneNumber.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.phoneNumber.$error.min" translate-value-min="8">
+                    This field should be more than 8.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.phoneNumber.$error.max">
+                    This field cannot be more than 8.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.phoneNumber.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setPicture($file, vm.employee)" ngf-pattern="'image/*'">
+            <label class="control-label" for="field_picture">Picture</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.employee.pictureContentType + ';base64,' + vm.employee.picture}}" style="max-height: 100px;" ng-if="vm.employee.picture"/>
+                <div class="help-block clearfix">
+                    <span class="pull-left">{{vm.employee.pictureContentType}}, {{byteSize(vm.employee.picture)}}</span>
+                    <button ng-click="vm.employee.picture=null;vm.employee.pictureContentType=null;"
+                            ng-if="vm.employee.picture"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setPicture($file, vm.employee)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="picture" id="field_picture"
+                    ng-model="vm.employee.picture"
+                     />
+            <input type="hidden" class="form-control" name="pictureContentType" id="field_pictureContentType"
+                    ng-model="vm.employee.pictureContentType" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_hiredDate">HiredDate</label>
+                <div class="input-group">
+                    <input id="field_hiredDate" type="text" class="form-control" name="hiredDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.employee.hiredDate" is-open="vm.datePickerOpenStatus.hiredDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('hiredDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_hourlyRate">HourlyRate</label>
+            <input type="number" class="form-control" name="hourlyRate" id="field_hourlyRate"
+                    ng-model="vm.employee.hourlyRate"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

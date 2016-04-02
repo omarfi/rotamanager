@@ -1,0 +1,54 @@
+
+<div>
+    <h2><span>Employee</span> {{vm.employee.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span>EmployeeIdExternal</dt></dt>
+        <dd>
+            <span>{{vm.employee.employeeIdExternal}}<span>
+        </dd>
+        <hr>
+        <dt><span>FirstName</dt></dt>
+        <dd>
+            <span>{{vm.employee.firstName}}<span>
+        </dd>
+        <hr>
+        <dt><span>LastName</dt></dt>
+        <dd>
+            <span>{{vm.employee.lastName}}<span>
+        </dd>
+        <hr>
+        <dt><span>Email</dt></dt>
+        <dd>
+            <span>{{vm.employee.email}}<span>
+        </dd>
+        <hr>
+        <dt><span>PhoneNumber</dt></dt>
+        <dd>
+            <span>{{vm.employee.phoneNumber}}<span>
+        </dd>
+        <hr>
+        <dt><span>Picture</dt></dt>
+        <dd>
+            <img data-ng-src="{{'data:' + vm.employee.pictureContentType + ';base64,' + vm.employee.picture}}" style="max-width: 100%;" ng-if="vm.employee.picture"/>
+            <div>{{vm.employee.pictureContentType}}, {{vm.byteSize(vm.employee.picture)}}</div>
+        </dd>
+        <hr>
+        <dt><span>HiredDate</dt></dt>
+        <dd>
+            <span>{{vm.employee.hiredDate | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span>HourlyRate</dt></dt>
+        <dd>
+            <span>{{vm.employee.hourlyRate}}<span>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

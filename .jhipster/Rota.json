@@ -1,0 +1,44 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "shifts",
+      "otherEntityName": "shift",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "rota"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "store",
+      "otherEntityName": "store",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "month",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required",
+        "min",
+        "max"
+      ],
+      "fieldValidateRulesMin": 1,
+      "fieldValidateRulesMax": 12
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "year",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "changelogDate": "20160402203344",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no"
+}

@@ -1,0 +1,78 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "shifts",
+      "otherEntityName": "shift",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "employee"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "stores",
+      "otherEntityName": "store",
+      "relationshipType": "many-to-many",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "employees"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "employeeIdExternal",
+      "fieldType": "Long"
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldId": 4,
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldId": 5,
+      "fieldName": "phoneNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "min",
+        "max"
+      ],
+      "fieldValidateRulesMin": 8,
+      "fieldValidateRulesMax": 8
+    },
+    {
+      "fieldId": 6,
+      "fieldName": "picture",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldId": 7,
+      "fieldName": "hiredDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldId": 8,
+      "fieldName": "hourlyRate",
+      "fieldType": "Integer"
+    }
+  ],
+  "changelogDate": "20160402203343",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no"
+}

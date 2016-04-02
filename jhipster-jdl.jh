@@ -1,0 +1,52 @@
+entity Store {
+  storeIdExternal Integer required,
+  name String required,
+  email String required
+}
+
+entity Employee {
+    employeeIdExternal Long,
+    firstName String required,
+    lastName String required,
+    email String,
+    phoneNumber Integer min(8) max(8),
+    picture ImageBlob,
+    hiredDate LocalDate,
+    hourlyRate Integer
+}
+
+entity Rota {
+	month Integer required min(1) max(12),
+    year Integer required
+}
+
+entity Shift {
+	start ZonedDateTime required,
+    end ZonedDateTime required,
+}
+
+relationship OneToMany {
+  Store{rotas} to Rota{store}
+}
+
+relationship OneToMany {
+  Rota{shifts} to Shift{rota}
+}
+
+relationship OneToMany {
+  Employee{shifts} to Shift{Employee}
+}
+
+relationship ManyToMany {
+  Store{employees} to Employee{stores}
+}
+
+paginate Rota, Employee with infinite-scroll
+paginate Store with pagination
+
+service Employee with serviceClass
+
+service Rota with serviceClass
+
+service Store with serviceClass
+	

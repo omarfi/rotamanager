@@ -1,0 +1,49 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "rotas",
+      "otherEntityName": "rota",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "store"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "employees",
+      "otherEntityName": "employee",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "storeIdExternal",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "changelogDate": "20160402203342",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass"
+}
