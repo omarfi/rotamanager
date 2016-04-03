@@ -1,7 +1,6 @@
 package com.ofi.rotamanager.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.ofi.rotamanager.domain.Authority;
 import com.ofi.rotamanager.domain.PersistentToken;
 import com.ofi.rotamanager.domain.User;
 import com.ofi.rotamanager.repository.PersistentTokenRepository;
@@ -66,14 +65,13 @@ public class AccountResource {
         HttpHeaders textPlainHeaders = new HttpHeaders();
         textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
 
-        return userRepository.findOneByLogin(userDTO.getLogin())
+        return userRepository.findOneByUsername(userDTO.getUsername())
             .map(user -> new ResponseEntity<>("login already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
             .orElseGet(() -> userRepository.findOneByEmail(userDTO.getEmail())
                 .map(user -> new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
                 .orElseGet(() -> {
-                    User user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(),
-                    userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail().toLowerCase(),
-                    userDTO.getLangKey());
+                    User user = userService.createUserInformation(userDTO.getUsername(), userDTO.getPassword(),
+                    userDTO.getEmail().toLowerCase());
                     String baseUrl = request.getScheme() + // "http"
                     "://" +                                // "://"
                     request.getServerName() +              // "myhost"
@@ -145,14 +143,13 @@ public class AccountResource {
     @Timed
     public ResponseEntity<String> saveAccount(@RequestBody UserDTO userDTO) {
         Optional<User> existingUser = userRepository.findOneByEmail(userDTO.getEmail());
-        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userDTO.getLogin()))) {
+        if (existingUser.isPresent() && (!existingUser.get().getUsername().equalsIgnoreCase(userDTO.getUsername()))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("user-management", "emailexists", "Email already in use")).body(null);
         }
         return userRepository
-            .findOneByLogin(SecurityUtils.getCurrentUserLogin())
+            .findOneByUsername(SecurityUtils.getCurrentUserLogin())
             .map(u -> {
-                userService.updateUserInformation(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
-                    userDTO.getLangKey());
+                userService.updateUserInformation(userDTO.getEmail());
                 return new ResponseEntity<String>(HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
@@ -187,7 +184,7 @@ public class AccountResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<PersistentToken>> getCurrentSessions() {
-        return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin())
+        return userRepository.findOneByUsername(SecurityUtils.getCurrentUserLogin())
             .map(user -> new ResponseEntity<>(
                 persistentTokenRepository.findByUser(user),
                 HttpStatus.OK))
@@ -215,7 +212,7 @@ public class AccountResource {
     @Timed
     public void invalidateSession(@PathVariable String series) throws UnsupportedEncodingException {
         String decodedSeries = URLDecoder.decode(series, "UTF-8");
-        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
+        userRepository.findOneByUsername(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
             persistentTokenRepository.findByUser(u).stream()
                 .filter(persistentToken -> StringUtils.equals(persistentToken.getSeries(), decodedSeries))
                 .findAny().ifPresent(t -> persistentTokenRepository.delete(decodedSeries));

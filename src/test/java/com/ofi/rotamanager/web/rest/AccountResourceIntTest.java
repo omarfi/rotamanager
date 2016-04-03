@@ -113,9 +113,7 @@ public class AccountResourceIntTest {
         authorities.add(authority);
 
         User user = new User();
-        user.setLogin("test");
-        user.setFirstName("john");
-        user.setLastName("doe");
+        user.setUsername("test");
         user.setEmail("john.doe@jhipter.com");
         user.setAuthorities(authorities);
         when(mockUserService.getUserWithAuthorities()).thenReturn(user);
@@ -124,9 +122,7 @@ public class AccountResourceIntTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.login").value("test"))
-                .andExpect(jsonPath("$.firstName").value("john"))
-                .andExpect(jsonPath("$.lastName").value("doe"))
+                .andExpect(jsonPath("$.username").value("test"))
                 .andExpect(jsonPath("$.email").value("john.doe@jhipter.com"))
                 .andExpect(jsonPath("$.authorities").value(AuthoritiesConstants.ADMIN));
     }
@@ -144,14 +140,11 @@ public class AccountResourceIntTest {
     @Transactional
     public void testRegisterValid() throws Exception {
         UserDTO u = new UserDTO(
-            "joe",                  // login
+            "joe",                  // username
             "password",             // password
-            "Joe",                  // firstName
-            "Shmoe",                // lastName
             "joe@example.com",      // e-mail
             true,                   // activated
-            "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.STORE))
         );
 
         restMvc.perform(
@@ -160,7 +153,7 @@ public class AccountResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isCreated());
 
-        Optional<User> user = userRepository.findOneByLogin("joe");
+        Optional<User> user = userRepository.findOneByUsername("joe");
         assertThat(user.isPresent()).isTrue();
     }
 
@@ -168,14 +161,11 @@ public class AccountResourceIntTest {
     @Transactional
     public void testRegisterInvalidLogin() throws Exception {
         UserDTO u = new UserDTO(
-            "funky-log!n",          // login <-- invalid
+            "funky-log!n",          // username <-- invalid
             "password",             // password
-            "Funky",                // firstName
-            "One",                  // lastName
             "funky@example.com",    // e-mail
             true,                   // activated
-            "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.STORE))
         );
 
         restUserMockMvc.perform(
@@ -192,14 +182,11 @@ public class AccountResourceIntTest {
     @Transactional
     public void testRegisterInvalidEmail() throws Exception {
         UserDTO u = new UserDTO(
-            "bob",              // login
+            "bob",              // username
             "password",         // password
-            "Bob",              // firstName
-            "Green",            // lastName
             "invalid",          // e-mail <-- invalid
             true,               // activated
-            "en",               // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.STORE))
         );
 
         restUserMockMvc.perform(
@@ -208,7 +195,7 @@ public class AccountResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isBadRequest());
 
-        Optional<User> user = userRepository.findOneByLogin("bob");
+        Optional<User> user = userRepository.findOneByUsername("bob");
         assertThat(user.isPresent()).isFalse();
     }
 
@@ -216,14 +203,11 @@ public class AccountResourceIntTest {
     @Transactional
     public void testRegisterEmailEmpty() throws Exception {
         UserDTO u = new UserDTO(
-            "bob",              // login
+            "bob",              // username
             "password",         // password
-            "Bob",              // firstName
-            "Green",            // lastName
             "",                 // e-mail <-- empty
             true,               // activated
-            "en",               // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.STORE))
         );
 
         restUserMockMvc.perform(
@@ -232,7 +216,7 @@ public class AccountResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isBadRequest());
 
-        Optional<User> user = userRepository.findOneByLogin("bob");
+        Optional<User> user = userRepository.findOneByUsername("bob");
         assertThat(user.isPresent()).isFalse();
     }
 
@@ -241,19 +225,16 @@ public class AccountResourceIntTest {
     public void testRegisterDuplicateLogin() throws Exception {
         // Good
         UserDTO u = new UserDTO(
-            "alice",                // login
+            "alice",                // username
             "password",             // password
-            "Alice",                // firstName
-            "Something",            // lastName
             "alice@example.com",    // e-mail
             true,                   // activated
-            "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.STORE))
         );
 
-        // Duplicate login, different e-mail
-        UserDTO dup = new UserDTO(u.getLogin(), u.getPassword(), u.getLogin(), u.getLastName(),
-            "alicejr@example.com", true, u.getLangKey(), u.getAuthorities());
+        // Duplicate username, different e-mail
+        UserDTO dup = new UserDTO(u.getUsername(), u.getPassword(),
+            "alicejr@example.com", true, u.getAuthorities());
 
         // Good user
         restMvc.perform(
@@ -262,7 +243,7 @@ public class AccountResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isCreated());
 
-        // Duplicate login
+        // Duplicate username
         restMvc.perform(
             post("/api/register")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -278,19 +259,16 @@ public class AccountResourceIntTest {
     public void testRegisterDuplicateEmail() throws Exception {
         // Good
         UserDTO u = new UserDTO(
-            "john",                 // login
+            "john",                 // username
             "password",             // password
-            "John",                 // firstName
-            "Doe",                  // lastName
             "john@example.com",     // e-mail
             true,                   // activated
-            "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.STORE))
         );
 
-        // Duplicate e-mail, different login
-        UserDTO dup = new UserDTO("johnjr", u.getPassword(), u.getLogin(), u.getLastName(),
-            u.getEmail(), true, u.getLangKey(), u.getAuthorities());
+        // Duplicate e-mail, different username
+        UserDTO dup = new UserDTO("johnjr", u.getPassword(),
+            u.getEmail(), true, u.getAuthorities());
 
         // Good user
         restMvc.perform(
@@ -306,7 +284,7 @@ public class AccountResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(dup)))
             .andExpect(status().is4xxClientError());
 
-        Optional<User> userDup = userRepository.findOneByLogin("johnjr");
+        Optional<User> userDup = userRepository.findOneByUsername("johnjr");
         assertThat(userDup.isPresent()).isFalse();
     }
 
@@ -314,13 +292,10 @@ public class AccountResourceIntTest {
     @Transactional
     public void testRegisterAdminIsIgnored() throws Exception {
         UserDTO u = new UserDTO(
-            "badguy",               // login
+            "badguy",               // username
             "password",             // password
-            "Bad",                  // firstName
-            "Guy",                  // lastName
             "badguy@example.com",   // e-mail
             true,                   // activated
-            "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN)) // <-- only admin should be able to do that
         );
 
@@ -330,9 +305,9 @@ public class AccountResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isCreated());
 
-        Optional<User> userDup = userRepository.findOneByLogin("badguy");
+        Optional<User> userDup = userRepository.findOneByUsername("badguy");
         assertThat(userDup.isPresent()).isTrue();
         assertThat(userDup.get().getAuthorities()).hasSize(1)
-            .containsExactly(authorityRepository.findOne(AuthoritiesConstants.USER));
+            .containsExactly(authorityRepository.findOne(AuthoritiesConstants.STORE));
     }
 }

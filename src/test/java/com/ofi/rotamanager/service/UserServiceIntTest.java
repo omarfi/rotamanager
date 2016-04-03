@@ -45,7 +45,7 @@ public class UserServiceIntTest {
 
     @Test
     public void testRemoveOldPersistentTokens() {
-        User admin = userRepository.findOneByLogin("admin").get();
+        User admin = userRepository.findOneByUsername("admin").get();
         int existingCount = persistentTokenRepository.findByUser(admin).size();
         generateUserToken(admin, "1111-1111", LocalDate.now());
         LocalDate now = LocalDate.now();
@@ -70,7 +70,7 @@ public class UserServiceIntTest {
 
     @Test
     public void assertThatOnlyActivatedUserCanRequestPasswordReset() {
-        User user = userService.createUserInformation("johndoe", "johndoe", "John", "Doe", "john.doe@localhost", "en-US");
+        User user = userService.createUserInformation("johndoe", "johndoe", "john.doe@localhost");
         Optional<User> maybeUser = userService.requestPasswordReset("john.doe@localhost");
         assertThat(maybeUser.isPresent()).isFalse();
         userRepository.delete(user);
@@ -78,7 +78,7 @@ public class UserServiceIntTest {
 
     @Test
     public void assertThatResetKeyMustNotBeOlderThan24Hours() {
-        User user = userService.createUserInformation("johndoe", "johndoe", "John", "Doe", "john.doe@localhost", "en-US");
+        User user = userService.createUserInformation("johndoe", "johndoe", "john.doe@localhost");
 
         ZonedDateTime daysAgo = ZonedDateTime.now().minusHours(25);
         String resetKey = RandomUtil.generateResetKey();
@@ -97,7 +97,7 @@ public class UserServiceIntTest {
 
     @Test
     public void assertThatResetKeyMustBeValid() {
-        User user = userService.createUserInformation("johndoe", "johndoe", "John", "Doe", "john.doe@localhost", "en-US");
+        User user = userService.createUserInformation("johndoe", "johndoe", "john.doe@localhost");
 
         ZonedDateTime daysAgo = ZonedDateTime.now().minusHours(25);
         user.setActivated(true);
@@ -111,7 +111,7 @@ public class UserServiceIntTest {
 
     @Test
     public void assertThatUserCanResetPassword() {
-        User user = userService.createUserInformation("johndoe", "johndoe", "John", "Doe", "john.doe@localhost", "en-US");
+        User user = userService.createUserInformation("johndoe", "johndoe", "john.doe@localhost");
         String oldPassword = user.getPassword();
         ZonedDateTime daysAgo = ZonedDateTime.now().minusHours(2);
         String resetKey = RandomUtil.generateResetKey();

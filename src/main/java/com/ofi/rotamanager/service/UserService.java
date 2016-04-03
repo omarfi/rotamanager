@@ -1,7 +1,6 @@
 package com.ofi.rotamanager.service;
 
 import com.ofi.rotamanager.domain.Authority;
-import com.ofi.rotamanager.domain.PersistentToken;
 import com.ofi.rotamanager.domain.User;
 import com.ofi.rotamanager.repository.AuthorityRepository;
 import com.ofi.rotamanager.repository.PersistentTokenRepository;
@@ -19,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
 import javax.inject.Inject;
 import java.util.*;
 
@@ -41,7 +39,6 @@ public class UserService {
 
     @Inject
     private UserSearchRepository userSearchRepository;
-
 
     @Inject
     private PersistentTokenRepository persistentTokenRepository;
@@ -91,20 +88,16 @@ public class UserService {
             });
     }
 
-    public User createUserInformation(String login, String password, String firstName, String lastName, String email,
-        String langKey) {
+    public User createUserInformation(String login, String password, String email) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne("ROLE_USER");
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(password);
-        newUser.setLogin(login);
+        newUser.setUsername(login);
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
-        newUser.setFirstName(firstName);
-        newUser.setLastName(lastName);
         newUser.setEmail(email);
-        newUser.setLangKey(langKey);
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key
@@ -119,15 +112,8 @@ public class UserService {
 
     public User createUser(ManagedUserDTO managedUserDTO) {
         User user = new User();
-        user.setLogin(managedUserDTO.getLogin());
-        user.setFirstName(managedUserDTO.getFirstName());
-        user.setLastName(managedUserDTO.getLastName());
+        user.setUsername(managedUserDTO.getUsername());
         user.setEmail(managedUserDTO.getEmail());
-        if (managedUserDTO.getLangKey() == null) {
-            user.setLangKey("en"); // default language
-        } else {
-            user.setLangKey(managedUserDTO.getLangKey());
-        }
         if (managedUserDTO.getAuthorities() != null) {
             Set<Authority> authorities = new HashSet<>();
             managedUserDTO.getAuthorities().stream().forEach(
@@ -146,20 +132,17 @@ public class UserService {
         return user;
     }
 
-    public void updateUserInformation(String firstName, String lastName, String email, String langKey) {
-        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
-            u.setFirstName(firstName);
-            u.setLastName(lastName);
+    public void updateUserInformation(String email) {
+        userRepository.findOneByUsername(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
             u.setEmail(email);
-            u.setLangKey(langKey);
             userRepository.save(u);
             userSearchRepository.save(u);
             log.debug("Changed Information for User: {}", u);
         });
     }
 
-    public void deleteUserInformation(String login) {
-        userRepository.findOneByLogin(login).ifPresent(u -> {
+    public void deleteUserInformation(String username) {
+        userRepository.findOneByUsername(username).ifPresent(u -> {
             userRepository.delete(u);
             userSearchRepository.delete(u);
             log.debug("Deleted User: {}", u);
@@ -167,7 +150,7 @@ public class UserService {
     }
 
     public void changePassword(String password) {
-        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
+        userRepository.findOneByUsername(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
             String encryptedPassword = passwordEncoder.encode(password);
             u.setPassword(encryptedPassword);
             userRepository.save(u);
@@ -177,7 +160,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
-        return userRepository.findOneByLogin(login).map(u -> {
+        return userRepository.findOneByUsername(login).map(u -> {
             u.getAuthorities().size();
             return u;
         });
@@ -192,7 +175,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User getUserWithAuthorities() {
-        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        User user = userRepository.findOneByUsername(SecurityUtils.getCurrentUserLogin()).get();
         user.getAuthorities().size(); // eagerly load the association
         return user;
     }
@@ -226,7 +209,7 @@ public class UserService {
         ZonedDateTime now = ZonedDateTime.now();
         List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(3));
         for (User user : users) {
-            log.debug("Deleting not activated user {}", user.getLogin());
+            log.debug("Deleting not activated user {}", user.getUsername());
             userRepository.delete(user);
             userSearchRepository.delete(user);
         }

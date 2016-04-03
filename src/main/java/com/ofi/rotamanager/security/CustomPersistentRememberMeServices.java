@@ -1,13 +1,11 @@
 package com.ofi.rotamanager.security;
 
 import com.ofi.rotamanager.domain.PersistentToken;
-import com.ofi.rotamanager.domain.User;
 import com.ofi.rotamanager.repository.PersistentTokenRepository;
 import com.ofi.rotamanager.repository.UserRepository;
 import com.ofi.rotamanager.config.JHipsterProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -83,7 +81,7 @@ public class CustomPersistentRememberMeServices extends
         HttpServletResponse response) {
 
         PersistentToken token = getPersistentToken(cookieTokens);
-        String login = token.getUser().getLogin();
+        String login = token.getUser().getUsername();
 
         // Token also matches, so login is valid. Update the token value, keeping the *same* series number.
         log.debug("Refreshing persistent login token for user '{}', series '{}'", login, token.getSeries());
@@ -108,7 +106,7 @@ public class CustomPersistentRememberMeServices extends
         String login = successfulAuthentication.getName();
 
         log.debug("Creating new persistent login for user {}", login);
-        PersistentToken token = userRepository.findOneByLogin(login).map(u -> {
+        PersistentToken token = userRepository.findOneByUsername(login).map(u -> {
             PersistentToken t = new PersistentToken();
             t.setSeries(generateSeriesData());
             t.setUser(u);
