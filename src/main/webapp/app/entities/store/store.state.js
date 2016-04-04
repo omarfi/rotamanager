@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/store?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_STORE'],
                 pageTitle: 'Stores'
             },
             views: {
@@ -50,7 +50,7 @@
             parent: 'entity',
             url: '/store/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_STORE'],
                 pageTitle: 'Store'
             },
             views: {
@@ -70,7 +70,7 @@
             parent: 'store',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_STORE']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -100,7 +100,7 @@
             parent: 'store',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_STORE']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -125,7 +125,7 @@
             parent: 'store',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_STORE']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/shift',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_STORE'],
                 pageTitle: 'Shifts'
             },
             views: {
@@ -30,7 +30,7 @@
             parent: 'entity',
             url: '/shift/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_STORE'],
                 pageTitle: 'Shift'
             },
             views: {
@@ -50,7 +50,7 @@
             parent: 'shift',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_STORE']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -79,7 +79,7 @@
             parent: 'shift',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_STORE']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -104,7 +104,7 @@
             parent: 'shift',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_STORE']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

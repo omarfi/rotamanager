@@ -25,7 +25,7 @@
                 firstName: account.firstName,
                 langKey: account.langKey,
                 lastName: account.lastName,
-                login: account.login
+                username: account.username
             };
         };
 

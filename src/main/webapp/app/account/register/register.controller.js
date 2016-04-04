@@ -19,13 +19,12 @@
         vm.registerAccount = {};
         vm.success = null;
 
-        $timeout(function (){angular.element('[ng-model="vm.registerAccount.login"]').focus();});
+        $timeout(function (){angular.element('[ng-model="vm.registerAccount.username"]').focus();});
 
         function register () {
             if (vm.registerAccount.password !== vm.confirmPassword) {
                 vm.doNotMatch = 'ERROR';
             } else {
-                vm.registerAccount.langKey =  'en' ;
                 vm.doNotMatch = null;
                 vm.error = null;
                 vm.errorUserExists = null;
@@ -35,7 +34,7 @@
                     vm.success = 'OK';
                 }).catch(function (response) {
                     vm.success = null;
-                    if (response.status === 400 && response.data === 'login already in use') {
+                    if (response.status === 400 && response.data === 'username already in use') {
                         vm.errorUserExists = 'ERROR';
                     } else if (response.status === 400 && response.data === 'e-mail address already in use') {
                         vm.errorEmailExists = 'ERROR';

@@ -121,7 +121,7 @@
         <loadData encoding="UTF-8"
                   file="config/liquibase/k_authorities.csv"
                   separator=";"
-                  tableName="t_k_authorities"/>
+                  tableName="t_k_authority"/>
 
         <loadData encoding="UTF-8"
                   file="config/liquibase/users_authorities.csv"

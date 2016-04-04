@@ -66,7 +66,7 @@ public class AccountResource {
         textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
 
         return userRepository.findOneByUsername(userDTO.getUsername())
-            .map(user -> new ResponseEntity<>("login already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
+            .map(user -> new ResponseEntity<>("username already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
             .orElseGet(() -> userRepository.findOneByEmail(userDTO.getEmail())
                 .map(user -> new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
                 .orElseGet(() -> {
