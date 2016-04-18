@@ -11,10 +11,11 @@
         $stateProvider.state('app', {
             abstract: true,
             views: {
-                'navbar@': {
-                    templateUrl: 'app/layouts/navbar/navbar.html',
-                    controller: 'NavbarController',
-                    controllerAs: 'vm'
+                "unauthenticated@": {
+                    templateUrl: 'app/layouts/unauthenticated/unauthenticated.html'
+                },
+                "authenticated@": {
+                    templateUrl: 'app/layouts/authenticated/authenticated.html'
                 }
             },
             resolve: {

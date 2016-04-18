@@ -1,0 +1,39 @@
+<div class="alert alert-danger" ng-show="vm.authenticationError">
+    Butikk iden og passordet du oppga, stemmer ikke overens.
+</div>
+
+
+    <p class="login-box-msg">Logg inn til din butikk side</p>
+
+    <form ng-submit="vm.login($event)">
+        <div class="form-group has-feedback">
+            <input id="username" type="text" class="form-control" placeholder="Butikk ID"
+                   ng-model="vm.username"/>
+            <span class="glyphicon glyphicon-home form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <input id="password" type="password" class="form-control" placeholder="Passord"
+                   ng-model="vm.password"/>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="checkbox icheck">
+                    <label for="rememberMe">
+                        <input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked> Husk meg
+                    </label>
+                </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Logg inn</button>
+            </div>
+            <!-- /.col -->
+        </div>
+    </form>
+
+    <a href="" ng-click="vm.requestResetPassword()">Glemt passord</a><br>
+    <a class="text-center" href="" ng-click="vm.register()">Registrer ny butikk</a>
+
+
+<!-- /.login-box-body -->

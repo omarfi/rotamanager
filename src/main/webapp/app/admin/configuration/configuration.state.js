@@ -16,7 +16,7 @@
                 pageTitle: 'Configuration'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/admin/configuration/configuration.html',
                     controller: 'JhiConfigurationController',
                     controllerAs: 'vm'

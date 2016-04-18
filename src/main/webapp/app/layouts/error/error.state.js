@@ -10,26 +10,26 @@
     function stateConfig($stateProvider) {
         $stateProvider
             .state('error', {
-                parent: 'app',
+                parent: 'unauthenticated',
                 url: '/error',
                 data: {
                     authorities: [],
                     pageTitle: 'Error page!'
                 },
                 views: {
-                    'content@': {
+                    'content@unauthenticated': {
                         templateUrl: 'app/layouts/error/error.html'
                     }
                 }
             })
             .state('accessdenied', {
-                parent: 'app',
+                parent: 'unauthenticated',
                 url: '/accessdenied',
                 data: {
                     authorities: []
                 },
                 views: {
-                    'content@': {
+                    'content@unauthenticated': {
                         templateUrl: 'app/layouts/error/accessdenied.html'
                     }
                 }

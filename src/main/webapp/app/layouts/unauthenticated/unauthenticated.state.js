@@ -8,9 +8,14 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
-        $stateProvider.state('account', {
+        $stateProvider.state('unauthenticated', {
             abstract: true,
-            parent: 'authenticated'
+            parent: 'app',
+            views: {
+                'layout@': {
+                    templateUrl: 'app/layouts/unauthenticated/unauthenticated.html'
+                }
+            }
         });
     }
 })();

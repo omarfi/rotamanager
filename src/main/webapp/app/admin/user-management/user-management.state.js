@@ -17,7 +17,7 @@
                 pageTitle: 'rotamanager'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/admin/user-management/user-management.html',
                     controller: 'UserManagementController',
                     controllerAs: 'vm'
@@ -32,7 +32,7 @@
                 pageTitle: 'rotamanager'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/admin/user-management/user-management-detail.html',
                     controller: 'UserManagementDetailController',
                     controllerAs: 'vm'

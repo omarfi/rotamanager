@@ -17,7 +17,7 @@
                 pageTitle: 'Shifts'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/entities/shift/shifts.html',
                     controller: 'ShiftController',
                     controllerAs: 'vm'
@@ -34,7 +34,7 @@
                 pageTitle: 'Shift'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/entities/shift/shift-detail.html',
                     controller: 'ShiftDetailController',
                     controllerAs: 'vm'

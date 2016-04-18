@@ -17,7 +17,7 @@
                 pageTitle: 'Employees'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/entities/employee/employees.html',
                     controller: 'EmployeeController',
                     controllerAs: 'vm'
@@ -34,7 +34,7 @@
                 pageTitle: 'Employee'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/entities/employee/employee-detail.html',
                     controller: 'EmployeeDetailController',
                     controllerAs: 'vm'

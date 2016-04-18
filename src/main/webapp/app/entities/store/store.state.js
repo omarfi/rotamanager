@@ -17,7 +17,7 @@
                 pageTitle: 'Stores'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/entities/store/stores.html',
                     controller: 'StoreController',
                     controllerAs: 'vm'
@@ -54,7 +54,7 @@
                 pageTitle: 'Store'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/entities/store/store-detail.html',
                     controller: 'StoreDetailController',
                     controllerAs: 'vm'

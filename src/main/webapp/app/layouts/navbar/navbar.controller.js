@@ -5,9 +5,9 @@
         .module('rotamanagerApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$location', '$state', 'Auth', 'Principal', 'ENV', 'LoginService'];
+    NavbarController.$inject = ['$location', '$state', 'Auth', 'Principal', 'ENV'];
 
-    function NavbarController ($location, $state, Auth, Principal, ENV, LoginService) {
+    function NavbarController ($location, $state, Auth, Principal, ENV) {
         var vm = this;
 
         vm.navCollapsed = true;
@@ -18,12 +18,12 @@
         vm.$state = $state;
 
         function login () {
-            LoginService.open();
+            $state.go('login');
         }
 
         function logout () {
             Auth.logout();
-            $state.go('home');
+            $state.go('login');
         }
     }
 })();

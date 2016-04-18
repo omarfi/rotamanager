@@ -5,7 +5,7 @@
         .module('rotamanagerApp')
         .factory('authExpiredInterceptor', authExpiredInterceptor);
 
-    
+
     authExpiredInterceptor.$inject = ['$rootScope', '$q', '$injector', '$document'];
 
     function authExpiredInterceptor($rootScope, $q, $injector, $document) {
@@ -25,8 +25,6 @@
                 Auth.logout();
                 $rootScope.previousStateName = to;
                 $rootScope.previousStateNameParams = params;
-                var LoginPopupService = $injector.get('LoginService');
-                LoginPopupService.open();
             } else if (response.status === 403 && response.config.method !== 'GET' && getCSRF() === '') {
                 // If the CSRF token expired, then try to get a new CSRF token and retry the old request
                 var $http = $injector.get('$http');

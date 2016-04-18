@@ -16,7 +16,7 @@
                 pageTitle: 'Sessions'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/account/sessions/sessions.html',
                     controller: 'SessionsController',
                     controllerAs: 'vm'

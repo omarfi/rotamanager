@@ -5,9 +5,9 @@
         .module('rotamanagerApp')
         .controller('ResetFinishController', ResetFinishController);
 
-    ResetFinishController.$inject = ['$stateParams', '$timeout', 'Auth', 'LoginService'];
+    ResetFinishController.$inject = ['$stateParams', '$timeout', 'Auth'];
 
-    function ResetFinishController ($stateParams, $timeout, Auth, LoginService) {
+    function ResetFinishController ($stateParams, $timeout, Auth) {
         var vm = this;
 
         vm.keyMissing = angular.isUndefined($stateParams.key);

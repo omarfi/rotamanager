@@ -9,14 +9,14 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('register', {
-            parent: 'account',
+            parent: 'unauthenticated',
             url: '/register',
             data: {
                 authorities: [],
                 pageTitle: 'Registration'
             },
             views: {
-                'content@': {
+                'content@unauthenticated': {
                     templateUrl: 'app/account/register/register.html',
                     controller: 'RegisterController',
                     controllerAs: 'vm'

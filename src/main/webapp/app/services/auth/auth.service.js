@@ -5,9 +5,9 @@
         .module('rotamanagerApp')
         .factory('Auth', Auth);
 
-    Auth.$inject = ['$rootScope', '$state', '$q', 'Principal', 'AuthServerProvider', 'Account', 'LoginService', 'Register', 'Activate', 'Password', 'PasswordResetInit', 'PasswordResetFinish'];
+    Auth.$inject = ['$rootScope', '$state', '$q', 'Principal', 'AuthServerProvider', 'Account', 'Register', 'Activate', 'Password', 'PasswordResetInit', 'PasswordResetFinish'];
 
-    function Auth ($rootScope, $state, $q, Principal, AuthServerProvider, Account, LoginService, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
+    function Auth ($rootScope, $state, $q, Principal, AuthServerProvider, Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
         var service = {
             activateAccount: activateAccount,
             authorize: authorize,
@@ -61,7 +61,7 @@
 
                         // now, send them to the signin state so they can log in
                         $state.go('accessdenied');
-                        LoginService.open();
+                        $state.go('login');
                     }
                 }
             }

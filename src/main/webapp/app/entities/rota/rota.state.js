@@ -17,7 +17,7 @@
                 pageTitle: 'Rotas'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/entities/rota/rotas.html',
                     controller: 'RotaController',
                     controllerAs: 'vm'
@@ -34,7 +34,7 @@
                 pageTitle: 'Rota'
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/entities/rota/rota-detail.html',
                     controller: 'RotaDetailController',
                     controllerAs: 'vm'

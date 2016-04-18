@@ -6,15 +6,14 @@
         .controller('RegisterController', RegisterController);
 
 
-    RegisterController.$inject = [ '$timeout', 'Auth', 'LoginService'];
+    RegisterController.$inject = [ '$timeout', 'Auth'];
 
-    function RegisterController ($timeout, Auth, LoginService) {
+    function RegisterController ($timeout, Auth) {
         var vm = this;
 
         vm.doNotMatch = null;
         vm.error = null;
         vm.errorUserExists = null;
-        vm.login = LoginService.open;
         vm.register = register;
         vm.registerAccount = {};
         vm.success = null;

@@ -9,13 +9,13 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('home', {
-            parent: 'app',
+            parent: 'authenticated',
             url: '/',
             data: {
-                authorities: []
+                authorities: ['ROLE_STORE']
             },
             views: {
-                'content@': {
+                'content@authenticated': {
                     templateUrl: 'app/home/home.html',
                     controller: 'HomeController',
                     controllerAs: 'vm'

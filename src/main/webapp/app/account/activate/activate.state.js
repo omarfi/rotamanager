@@ -9,14 +9,14 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('activate', {
-            parent: 'account',
+            parent: 'unauthenticated',
             url: '/activate?key',
             data: {
                 authorities: [],
                 pageTitle: 'Activation'
             },
             views: {
-                'content@': {
+                'content@unauthenticated': {
                     templateUrl: 'app/account/activate/activate.html',
                     controller: 'ActivationController',
                     controllerAs: 'vm'

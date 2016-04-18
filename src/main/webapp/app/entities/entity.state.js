@@ -10,7 +10,7 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('entity', {
             abstract: true,
-            parent: 'app'
+            parent: 'authenticated'
         });
     }
 })();

@@ -5,9 +5,9 @@
         .module('rotamanagerApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth'];
 
-    function LoginController ($rootScope,$state, $timeout, Auth, $uibModalInstance) {
+    function LoginController ($rootScope,$state, $timeout, Auth) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -29,7 +29,6 @@
                 rememberMe: true
             };
             vm.authenticationError = false;
-            $uibModalInstance.dismiss('cancel');
         }
 
         function login (event) {
@@ -40,13 +39,13 @@
                 rememberMe: vm.rememberMe
             }).then(function () {
                 vm.authenticationError = false;
-                $uibModalInstance.close();
                 // If we're redirected to login, our
                 // previousState is already set in the authExpiredInterceptor. When login succesful go to stored state
                 if ($rootScope.redirected && $rootScope.previousStateName) {
                     $state.go($rootScope.previousStateName, $rootScope.previousStateParams);
                     $rootScope.redirected = false;
                 } else {
+                    $state.go('home');
                     $rootScope.$broadcast('authenticationSuccess');
                 }
             }).catch(function () {
@@ -55,13 +54,21 @@
         }
 
         function register () {
-            $uibModalInstance.dismiss('cancel');
             $state.go('register');
         }
 
         function requestResetPassword () {
-            $uibModalInstance.dismiss('cancel');
             $state.go('requestReset');
+            console.log(vm.authenticationError);
+
         }
+
+        /*$(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });*/
     }
 })();
