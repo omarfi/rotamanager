@@ -3210,12 +3210,10 @@ table.text-center th {
 }
 .unauthenticated-page {
     background: #d2d6de;
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0px;
-    left:0px;
-    z-index:0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow: auto;
 }
 .unauthenticated-container {
     width: 360px;
