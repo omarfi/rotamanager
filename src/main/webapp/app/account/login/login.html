@@ -1,76 +1,47 @@
+<h1>OFI RotaManager</h1>
+
+<p class="auth-link">Logg inn til din butikk side</p>
+
 <div class="alert alert-danger" ng-show="vm.authenticationError">
     Butikk iden og passordet du oppga, stemmer ikke overens.
 </div>
 
-
-    <p class="login-box-msg">Logg inn til din butikk side</p>
-
-    <form ng-submit="vm.login($event)">
-        <div class="form-group has-feedback">
-            <input id="username" type="text" class="form-control" placeholder="Butikk ID"
-                   ng-model="vm.username"/>
-            <span class="glyphicon glyphicon-home form-control-feedback"></span>
+<form class="form-horizontal" ng-submit="vm.login($event)">
+    <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">Butikk ID:</label>
+        <div class="col-sm-10">
+            <div class="right-inner-addon">
+                <i class="glyphicon glyphicon-home"></i>
+                <input id="username" type="text" class="form-control" placeholder="Butikk ID"
+                       ng-model="vm.username"/>
+            </div>
         </div>
-        <div class="form-group has-feedback">
-            <input id="password" type="password" class="form-control" placeholder="Passord"
-                   ng-model="vm.password"/>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">Password:</label>
+        <div class="col-sm-10">
+            <div class="right-inner-addon">
+                <i class="glyphicon glyphicon-lock"></i>
+                <input id="password" type="password" class="form-control" placeholder="Passord"
+                       ng-model="vm.password"/>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-xs-8">
-                <div class="checkbox">
-                    <label for="rememberMe">
-                        <input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked> Husk meg
-                    </label>
-                </div>
-            </div>
-            <!-- /.col -->
-            <div class="col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Logg inn</button>
-            </div>
-            <!-- /.col -->
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-5">
+            <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked>
+                <span>Husk meg</span>
+            </label>
         </div>
-    </form>
-
-    <a href="" ng-click="vm.requestResetPassword()">Glemt passord</a><br>
-    <a class="text-center" href="" ng-click="vm.register()">Registrer ny butikk</a>
-
-
-<!-- /.login-box-body -->
-
-
-        <h1>Sign in to Blur Admin</h1>
-        <a href="reg.html" class="auth-link">New to Blur Admin? Sign up!</a>
-
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-
-                <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default btn-auth">Sign in</button>
-                    <a href class="forgot-pass">Forgot password?</a>
-                </div>
-            </div>
-        </form>
-
-        <div class="auth-sep"><span><span>or Sign in with one click</span></span></div>
-
-        <div class="al-share-auth">
-            <ul class="al-share clearfix">
-                <li><i class="socicon socicon-facebook" title="Share on Facebook"></i></li>
-                <li><i class="socicon socicon-twitter" title="Share on Twitter"></i></li>
-                <li><i class="socicon socicon-google" title="Share on Google Plus"></i></li>
-            </ul>
+        <div class="col-sm-5">
+            <a href class="forgot-pass" ng-click="vm.requestResetPassword()">Glemt passord?</a>
         </div>
+        <div class="col-sm-offset-2 col-sm-5">
+            <button type="submit" class="btn btn-default btn-auth">Logg inn</button>
+        </div>
+        <div class="col-sm-5">
+            <a href class="forgot-pass" ng-click="vm.register()">Registrer ny butikk</a>
+        </div>
+    </div>
+</form>

@@ -9,20 +9,22 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css content/css/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel='stylesheet' href='bower_components/angular-loading-bar/build/loading-bar.css' />
     <!-- endbower -->
     <link rel="stylesheet" href="content/css/vendor.css">
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
-    <link rel="stylesheet" href="content/css/adminlte.css">
+
+    <link rel="stylesheet" href="bower_components/css/index" type="text/css">
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
+
 </head>
 <body ng-app="rotamanagerApp">
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak></div>
 
     <div ui-view="navbar" ng-cloak></div>
     <div ui-view="layout" ng-cloak></div>
@@ -64,6 +66,11 @@
     <script src="app/account/reset/request/reset.request.controller.js"></script>
     <script src="app/account/reset/finish/reset.finish.state.js"></script>
     <script src="app/account/reset/finish/reset.finish.controller.js"></script>
+    <script src="app/layouts/unauthenticated/unauthenticated.state.js"></script>
+    <script src="app/layouts/authenticated/authenticated.state.js"></script>
+    <script src="app/layouts/navbar/navbar.controller.js"></script>
+    <script src="app/layouts/navbar/active-link.directive.js"></script>
+    <script src="app/layouts/error/error.state.js"></script>
     <script src="app/services/user/user.service.js"></script>
     <script src="app/services/auth/sessions.service.js"></script>
     <script src="app/services/auth/register.service.js"></script>
@@ -77,11 +84,47 @@
     <script src="app/services/auth/auth.service.js"></script>
     <script src="app/services/auth/activate.service.js"></script>
     <script src="app/services/auth/account.service.js"></script>
-    <script src="app/layouts/unauthenticated/unauthenticated.state.js"></script>
-    <script src="app/layouts/navbar/navbar.controller.js"></script>
-    <script src="app/layouts/navbar/active-link.directive.js"></script>
-    <script src="app/layouts/error/error.state.js"></script>
-    <script src="app/layouts/authenticated/authenticated.state.js"></script>
+    <script src="app/entities/store/store.state.js"></script>
+    <script src="app/entities/store/store.service.js"></script>
+    <script src="app/entities/store/store.search.service.js"></script>
+    <script src="app/entities/store/store.controller.js"></script>
+    <script src="app/entities/store/store-dialog.controller.js"></script>
+    <script src="app/entities/store/store-detail.controller.js"></script>
+    <script src="app/entities/store/store-delete-dialog.controller.js"></script>
+    <script src="app/entities/rota/rota.state.js"></script>
+    <script src="app/entities/rota/rota.service.js"></script>
+    <script src="app/entities/rota/rota.search.service.js"></script>
+    <script src="app/entities/rota/rota.controller.js"></script>
+    <script src="app/entities/rota/rota-dialog.controller.js"></script>
+    <script src="app/entities/rota/rota-detail.controller.js"></script>
+    <script src="app/entities/rota/rota-delete-dialog.controller.js"></script>
+    <script src="app/entities/shift/shift.state.js"></script>
+    <script src="app/entities/shift/shift.service.js"></script>
+    <script src="app/entities/shift/shift.search.service.js"></script>
+    <script src="app/entities/shift/shift.controller.js"></script>
+    <script src="app/entities/shift/shift-dialog.controller.js"></script>
+    <script src="app/entities/shift/shift-detail.controller.js"></script>
+    <script src="app/entities/shift/shift-delete-dialog.controller.js"></script>
+    <script src="app/entities/employee/employee.state.js"></script>
+    <script src="app/entities/employee/employee.service.js"></script>
+    <script src="app/entities/employee/employee.search.service.js"></script>
+    <script src="app/entities/employee/employee.controller.js"></script>
+    <script src="app/entities/employee/employee-dialog.controller.js"></script>
+    <script src="app/entities/employee/employee-detail.controller.js"></script>
+    <script src="app/entities/employee/employee-delete-dialog.controller.js"></script>
+    <script src="app/admin/docs/docs.state.js"></script>
+    <script src="app/admin/health/health.state.js"></script>
+    <script src="app/admin/health/health.service.js"></script>
+    <script src="app/admin/health/health.modal.controller.js"></script>
+    <script src="app/admin/health/health.controller.js"></script>
+    <script src="app/blocks/interceptor/notification.interceptor.js"></script>
+    <script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
+    <script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
+    <script src="app/blocks/config/localstorage.config.js"></script>
+    <script src="app/blocks/config/http.config.js"></script>
+    <script src="app/blocks/config/compile.config.js"></script>
+    <script src="app/blocks/config/alert.config.js"></script>
+    <script src="app/blocks/handlers/state.handler.js"></script>
     <script src="app/components/util/truncate-words.filter.js"></script>
     <script src="app/components/util/truncate-characters.filter.js"></script>
     <script src="app/components/util/sort.directive.js"></script>
@@ -102,42 +145,9 @@
     <script src="app/components/alert/alert.service.js"></script>
     <script src="app/components/alert/alert.directive.js"></script>
     <script src="app/components/alert/alert-error.directive.js"></script>
-    <script src="app/entities/store/store.state.js"></script>
-    <script src="app/entities/store/store.service.js"></script>
-    <script src="app/entities/store/store.search.service.js"></script>
-    <script src="app/entities/store/store.controller.js"></script>
-    <script src="app/entities/store/store-dialog.controller.js"></script>
-    <script src="app/entities/store/store-detail.controller.js"></script>
-    <script src="app/entities/store/store-delete-dialog.controller.js"></script>
-    <script src="app/entities/shift/shift.state.js"></script>
-    <script src="app/entities/shift/shift.service.js"></script>
-    <script src="app/entities/shift/shift.search.service.js"></script>
-    <script src="app/entities/shift/shift.controller.js"></script>
-    <script src="app/entities/shift/shift-dialog.controller.js"></script>
-    <script src="app/entities/shift/shift-detail.controller.js"></script>
-    <script src="app/entities/shift/shift-delete-dialog.controller.js"></script>
-    <script src="app/entities/rota/rota.state.js"></script>
-    <script src="app/entities/rota/rota.service.js"></script>
-    <script src="app/entities/rota/rota.search.service.js"></script>
-    <script src="app/entities/rota/rota.controller.js"></script>
-    <script src="app/entities/rota/rota-dialog.controller.js"></script>
-    <script src="app/entities/rota/rota-detail.controller.js"></script>
-    <script src="app/entities/rota/rota-delete-dialog.controller.js"></script>
-    <script src="app/entities/employee/employee.state.js"></script>
-    <script src="app/entities/employee/employee.service.js"></script>
-    <script src="app/entities/employee/employee.search.service.js"></script>
-    <script src="app/entities/employee/employee.controller.js"></script>
-    <script src="app/entities/employee/employee-dialog.controller.js"></script>
-    <script src="app/entities/employee/employee-detail.controller.js"></script>
-    <script src="app/entities/employee/employee-delete-dialog.controller.js"></script>
-    <script src="app/blocks/interceptor/notification.interceptor.js"></script>
-    <script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
-    <script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
-    <script src="app/blocks/handlers/state.handler.js"></script>
-    <script src="app/blocks/config/localstorage.config.js"></script>
-    <script src="app/blocks/config/http.config.js"></script>
-    <script src="app/blocks/config/compile.config.js"></script>
-    <script src="app/blocks/config/alert.config.js"></script>
+    <script src="app/admin/logs/logs.state.js"></script>
+    <script src="app/admin/logs/logs.service.js"></script>
+    <script src="app/admin/logs/logs.controller.js"></script>
     <script src="app/admin/user-management/user-management.state.js"></script>
     <script src="app/admin/user-management/user-management.controller.js"></script>
     <script src="app/admin/user-management/user-management-dialog.controller.js"></script>
@@ -147,36 +157,28 @@
     <script src="app/admin/metrics/metrics.service.js"></script>
     <script src="app/admin/metrics/metrics.modal.controller.js"></script>
     <script src="app/admin/metrics/metrics.controller.js"></script>
-    <script src="app/admin/logs/logs.state.js"></script>
-    <script src="app/admin/logs/logs.service.js"></script>
-    <script src="app/admin/logs/logs.controller.js"></script>
-    <script src="app/admin/health/health.state.js"></script>
-    <script src="app/admin/health/health.service.js"></script>
-    <script src="app/admin/health/health.modal.controller.js"></script>
-    <script src="app/admin/health/health.controller.js"></script>
-    <script src="app/admin/docs/docs.state.js"></script>
     <script src="app/admin/configuration/configuration.state.js"></script>
     <script src="app/admin/configuration/configuration.service.js"></script>
     <script src="app/admin/configuration/configuration.controller.js"></script>
     <script src="app/admin/audits/audits.state.js"></script>
     <script src="app/admin/audits/audits.service.js"></script>
     <script src="app/admin/audits/audits.controller.js"></script>
-    <script src="app/account/settings/settings.state.js"></script>
-    <script src="app/account/settings/settings.controller.js"></script>
+    <script src="app/account/login/login.state.js"></script>
+    <script src="app/account/login/login.controller.js"></script>
     <script src="app/account/sessions/sessions.state.js"></script>
     <script src="app/account/sessions/sessions.controller.js"></script>
-    <script src="app/account/register/register.state.js"></script>
-    <script src="app/account/register/register.controller.js"></script>
+    <script src="app/account/settings/settings.state.js"></script>
+    <script src="app/account/settings/settings.controller.js"></script>
     <script src="app/account/password/password.state.js"></script>
     <script src="app/account/password/password.controller.js"></script>
     <script src="app/account/password/password-strength-bar.directive.js"></script>
-    <script src="app/account/login/login.state.js"></script>
-    <script src="app/account/login/login.controller.js"></script>
+    <script src="app/account/register/register.state.js"></script>
+    <script src="app/account/register/register.controller.js"></script>
     <script src="app/account/activate/activate.state.js"></script>
     <script src="app/account/activate/activate.controller.js"></script>
+    <script src="app/entities/entity.state.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.controller.js"></script>
-    <script src="app/entities/entity.state.js"></script>
     <script src="app/admin/admin.state.js"></script>
     <script src="app/account/account.state.js"></script>
     <script src="app/app.state.js"></script>
