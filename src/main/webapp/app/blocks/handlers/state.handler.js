@@ -6,10 +6,10 @@
         .factory('stateHandler', stateHandler);
 
     stateHandler.$inject = ['$rootScope', '$state',  '$window',
-        'Auth', 'Principal', 'ENV', 'VERSION'];
+        'Auth', 'Principal', 'ENV', 'VERSION', 'baSidebarService'];
 
     function stateHandler($rootScope, $state,  $window,
-        Auth, Principal, ENV, VERSION) {
+        Auth, Principal, ENV, VERSION, baSidebarService) {
         return {
             initialize: initialize
         };
@@ -18,6 +18,7 @@
             $rootScope.ENV = ENV;
             $rootScope.VERSION = VERSION;
             $rootScope.back = back;
+            $rootScope.$baSidebarService = baSidebarService;
 
             var stateChangeStart = $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
                 $rootScope.toState = toState;

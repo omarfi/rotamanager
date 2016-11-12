@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
           <div class="col-md-4">
-              <button class="btn btn-primary" ui-sref="user-management.new">
+              <button class="btn btn-primary" ui-sref="admin.user-management.new">
                   <span class="glyphicon glyphicon-flash"></span> <span>Create a new User</span>
               </button>
           </div>
@@ -15,10 +15,10 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Login</th>
+                <th>Username</th>
                 <th>Email</th>
                 <th></th>
-                
+
                 <th>Profiles</th>
                 <th>CreatedDate</th>
                 <th>LastModifiedBy</th>
@@ -28,8 +28,8 @@
             </thead>
             <tbody>
             <tr ng-repeat="user in vm.users track by user.id">
-                <td><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
-                <td>{{user.login}}</td>
+                <td><a ui-sref="admin.user-management-detail({username:user.username})">{{user.id}}</a></td>
+                <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
                 <td>
                     <span class="label label-danger" ng-click="vm.setActive(user, true)" ng-show="!user.activated"
@@ -37,7 +37,7 @@
                     <span class="label label-success" ng-click="vm.setActive(user, false)" ng-show="user.activated"
                           style="cursor: pointer;">Activated</span>
                 </td>
-                
+
                 <td>
                     <div ng-repeat="authority in user.authorities">
                         <span class="label label-info">{{ authority }}</span>
@@ -49,20 +49,20 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                ui-sref="user-management-detail({login:user.login})"
+                                ui-sref="admin.user-management-detail({username:user.username})"
                                 class="btn btn-info btn-sm">
                             <span class="glyphicon glyphicon-eye-open"></span>
                             <span class="hidden-xs hidden-sm"></span>
                         </button>
                         <button type="submit"
-                                ui-sref="user-management.edit({login:user.login})"
+                                ui-sref="admin.user-management.edit({username:user.username})"
                                 class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
                             <span class="hidden-xs hidden-sm"></span>
                         </button>
                         <button type="submit"
-                                ui-sref="user-management.delete({login:user.login})"
-                                class="btn btn-danger btn-sm" ng-disabled="vm.currentAccount.login==user.login">
+                                ui-sref="admin.user-management.delete({username:user.username})"
+                                class="btn btn-danger btn-sm" ng-disabled="vm.currentAccount.username==user.username">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                             <span class="hidden-xs hidden-sm"></span>
                         </button>

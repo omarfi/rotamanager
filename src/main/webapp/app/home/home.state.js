@@ -20,6 +20,11 @@
                     controller: 'HomeController',
                     controllerAs: 'vm'
                 }
+            },
+            title: 'Home',
+            sidebarMeta: {
+                icon: 'glyphicon glyphicon-home',
+                order: 0
             }
         });
     }

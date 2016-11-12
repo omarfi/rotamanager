@@ -10,7 +10,13 @@
     function stateConfig ($stateProvider) {
         $stateProvider.state('admin', {
             abstract: true,
-            parent: 'authenticated'
+            parent: 'authenticated',
+            title: 'Administration',
+            sidebarMeta: {
+                icon: 'glyphicon glyphicon-tower',
+                order: 1,
+                shouldBeVisible: true
+            }
         });
     }
 })();

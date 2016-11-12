@@ -1,10 +1,15 @@
 @import 'theme/conf/mixins';
 @import 'theme/conf/colorScheme/mint';
 @import 'theme/conf/variables';
-@import "theme/_layout.scss";
+@import "theme/layout.scss";
 @import 'theme/buttons.scss';
 @import 'app/form.scss';
+@import 'app/typography.scss';
 
+@import 'theme/components/sidebar';
+@import 'theme/components/pageTop';
+@import 'theme/components/msgCenter';
+@import 'theme/components/contentTop';
 
 body {
     font: 14px/16px $font-family;

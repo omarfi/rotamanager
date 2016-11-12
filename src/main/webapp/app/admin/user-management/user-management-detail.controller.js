@@ -13,10 +13,10 @@
         vm.load = load;
         vm.user = {};
 
-        vm.load($stateParams.login);
+        vm.load($stateParams.username);
 
-        function load (login) {
-            User.get({login: login}, function(result) {
+        function load (username) {
+            User.get({username: username}, function(result) {
                 vm.user = result;
             });
         }

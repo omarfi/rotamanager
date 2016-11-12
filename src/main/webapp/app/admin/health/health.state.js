@@ -8,8 +8,7 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
-        $stateProvider.state('jhi-health', {
-            parent: 'admin',
+        $stateProvider.state('admin.jhi-health', {
             url: '/health',
             data: {
                 authorities: ['ROLE_ADMIN'],
@@ -21,6 +20,11 @@
                     controller: 'JhiHealthCheckController',
                     controllerAs: 'vm'
                 }
+            },
+            title: 'Health',
+            sidebarMeta: {
+                icon: 'glyphicon glyphicon-heart',
+                order: 2
             }
         });
     }

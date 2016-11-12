@@ -8,8 +8,7 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
-        $stateProvider.state('audits', {
-            parent: 'admin',
+        $stateProvider.state('admin.audits', {
             url: '/audits',
             data: {
                 authorities: ['ROLE_ADMIN'],
@@ -21,6 +20,11 @@
                     controller: 'AuditsController',
                     controllerAs: 'vm'
                 }
+            },
+            title: 'Audits',
+            sidebarMeta: {
+                icon: 'glyphicon glyphicon-bell',
+                order: 4
             }
         });
     }

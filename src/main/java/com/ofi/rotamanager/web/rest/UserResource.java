@@ -195,7 +195,7 @@ public class UserResource {
      * @param username the username of the user to find
      * @return the ResponseEntity with status 200 (OK) and with body the "username" user, or with status 404 (Not Found)
      */
-    @RequestMapping(value = "/users/{login:[_'.@a-zA-z0-9-]+}",
+    @RequestMapping(value = "/users/{username:[_'.@a-zA-z0-9-]+}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -212,7 +212,7 @@ public class UserResource {
      * @param username the username of the user to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @RequestMapping(value = "/users/{login:[_'.@a-zA-z0-9-]+}",
+    @RequestMapping(value = "/users/{username:[_'.@a-zA-z0-9-]+}",
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed

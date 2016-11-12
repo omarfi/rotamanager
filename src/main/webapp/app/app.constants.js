@@ -7,5 +7,17 @@
 
 .constant("VERSION", "0.0.1-SNAPSHOT")
 
+.constant("layoutSizes", {
+	"resWidthCollapseSidebar": 1200,
+	"resWidthHideSidebar": 500
+})
+
+.constant("layoutPaths", {
+	"images": {
+		"root": "../content/images/",
+		"profile": "../content/images/"
+	}
+})
+
 ;
 })();

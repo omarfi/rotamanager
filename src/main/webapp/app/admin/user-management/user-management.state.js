@@ -9,8 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('user-management', {
-            parent: 'admin',
+        .state('admin.user-management', {
             url: '/user-management',
             data: {
                 authorities: ['ROLE_ADMIN'],
@@ -22,11 +21,15 @@
                     controller: 'UserManagementController',
                     controllerAs: 'vm'
                 }
+            },
+            title: 'User Management',
+            sidebarMeta: {
+                icon: 'glyphicon glyphicon-user',
+                order: 0
             }
         })
-        .state('user-management-detail', {
-            parent: 'admin',
-            url: '/user/:login',
+        .state('admin.user-management-detail', {
+            url: '/user/:username',
             data: {
                 authorities: ['ROLE_ADMIN'],
                 pageTitle: 'rotamanager'
@@ -39,8 +42,7 @@
                 }
             }
         })
-        .state('user-management.new', {
-            parent: 'user-management',
+        .state('admin.user-management.new', {
             url: '/new',
             data: {
                 authorities: ['ROLE_ADMIN']
@@ -55,7 +57,7 @@
                     resolve: {
                         entity: function () {
                             return {
-                                id: null, login: null, firstName: null, lastName: null, email: null,
+                                id: null, username: null, firstName: null, lastName: null, email: null,
                                 activated: true, langKey: null, createdBy: null, createdDate: null,
                                 lastModifiedBy: null, lastModifiedDate: null, resetDate: null,
                                 resetKey: null, authorities: null
@@ -63,15 +65,14 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('user-management', null, { reload: true });
+                    $state.go('admin.user-management', null, { reload: true });
                 }, function() {
-                    $state.go('user-management');
+                    $state.go('admin.user-management');
                 });
             }]
         })
-        .state('user-management.edit', {
-            parent: 'user-management',
-            url: '/{login}/edit',
+        .state('admin.user-management.edit', {
+            url: '/{username}/edit',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
@@ -84,19 +85,18 @@
                     size: 'lg',
                     resolve: {
                         entity: ['User', function(User) {
-                            return User.get({login : $stateParams.login});
+                            return User.get({username : $stateParams.username});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('user-management', null, { reload: true });
+                    $state.go('admin.user-management', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('user-management.delete', {
-            parent: 'user-management',
-            url: '/{login}/delete',
+        .state('admin.user-management.delete', {
+            url: '/{username}/delete',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
@@ -108,11 +108,11 @@
                     size: 'md',
                     resolve: {
                         entity: ['User', function(User) {
-                            return User.get({login : $stateParams.login});
+                            return User.get({username : $stateParams.username});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('user-management', null, { reload: true });
+                    $state.go('admin.user-management', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

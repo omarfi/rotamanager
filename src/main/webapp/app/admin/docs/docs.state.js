@@ -8,8 +8,7 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig ($stateProvider) {
-        $stateProvider.state('docs', {
-            parent: 'admin',
+        $stateProvider.state('admin.docs', {
             url: '/docs',
             data: {
                 authorities: ['ROLE_ADMIN'],
@@ -19,6 +18,11 @@
                 'content@authenticated': {
                     templateUrl: 'app/admin/docs/docs.html'
                 }
+            },
+            title: 'API',
+            sidebarMeta: {
+                icon: 'glyphicon glyphicon-book',
+                order: 6
             }
         });
     }
