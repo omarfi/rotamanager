@@ -24,40 +24,45 @@
             <column name="employee_id_external" type="bigint">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="first_name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="last_name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="email" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="phone_number" type="integer">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="picture" type="longblob">
                 <constraints nullable="true" />
             </column>
             <column name="picture_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="hired_date" type="date">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="hourly_rate" type="integer">
                 <constraints nullable="true" />
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
+        <addForeignKeyConstraint baseColumnNames="employeess_id"
+                                 baseTableName="store_employees"
+                                 constraintName="fk_store_employees_store_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
     </changeSet>
 </databaseChangeLog>

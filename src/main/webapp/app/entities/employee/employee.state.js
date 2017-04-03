@@ -24,6 +24,11 @@
                 }
             },
             resolve: {
+            },
+            title: 'Ansatte',
+            sidebarMeta: {
+                icon: 'ionicons ion-person-stalker',
+                order: 1
             }
         })
         .state('employee-detail', {

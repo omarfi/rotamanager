@@ -24,15 +24,15 @@
             <column name="store_id_external" type="integer">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="email" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
                 <createTable tableName="store_employees">
@@ -52,11 +52,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="store"/>
 
-        <addForeignKeyConstraint baseColumnNames="employeess_id"
-                                 baseTableName="store_employees"
-                                 constraintName="fk_store_employees_store_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="employee"/>
-        
     </changeSet>
 </databaseChangeLog>
