@@ -1,4 +1,3 @@
-
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
@@ -53,15 +52,15 @@
             <label class="control-label" for="field_phoneNumber">PhoneNumber</label>
             <input type="number" class="form-control" name="phoneNumber" id="field_phoneNumber"
                     ng-model="vm.employee.phoneNumber"
-                    min="8" max="8" />
+                   ng-minlength="8" maxlength="8" />
             <div ng-show="editForm.phoneNumber.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.phoneNumber.$error.min" translate-value-min="8">
-                    This field should be more than 8.
+                    ng-show="editForm.phoneNumber.$error.minlength">
+                    This field should be more than 8 digits.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.phoneNumber.$error.max">
-                    This field cannot be more than 8.
+                    ng-show="editForm.phoneNumber.$error.maxlength">
+                    This field cannot be more than 8 digits.
                 </p>
                 <p class="help-block"
                     ng-show="editForm.phoneNumber.$error.number">
@@ -72,7 +71,7 @@
         <div class="form-group" ngf-drop ngf-change="vm.setPicture($file, vm.employee)" ngf-pattern="'image/*'">
             <label class="control-label" for="field_picture">Picture</label>
             <div>
-                <img data-ng-src="{{'data:' + vm.employee.pictureContentType + ';base64,' + vm.employee.picture}}" style="max-height: 100px;" ng-if="vm.employee.picture"/>
+                <img data-ng-src="{{vm.employee.picture}}" style="max-height: 100px;" ng-if="vm.employee.picture"/>
                 <div class="help-block clearfix">
                     <span class="pull-left">{{vm.employee.pictureContentType}}, {{byteSize(vm.employee.picture)}}</span>
                     <button ng-click="vm.employee.picture=null;vm.employee.pictureContentType=null;"
@@ -85,6 +84,9 @@
                         ngf-change="vm.setPicture($file, vm.employee)" accept="image/*">
                     Add image
                 </button>
+                <div class="cropArea">
+                    <img-crop image="vm.uncroppedImg" result-image="vm.employee.picture"></img-crop>
+                </div>
             </div>
             <input type="hidden" class="form-control" name="picture" id="field_picture"
                     ng-model="vm.employee.picture"
@@ -119,3 +121,12 @@
         </button>
     </div>
 </form>
+
+<style>
+    .cropArea {
+        background: #E4E4E4;
+        overflow: hidden;
+        width:500px;
+        height:350px;
+    }
+</style>

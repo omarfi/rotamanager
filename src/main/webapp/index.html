@@ -11,6 +11,7 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
     <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
+    <link rel="stylesheet" href="bower_components/ng-img-crop/compile/minified/ng-img-crop.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="content/css/vendor.css">
     <!-- endbuild -->
@@ -58,17 +59,19 @@
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js app/app.js  -->
     <!-- inject:js -->
     <script src="app/app.module.js"></script>
-    <script src="app/account/reset/finish/reset.finish.state.js"></script>
-    <script src="app/account/reset/finish/reset.finish.controller.js"></script>
     <script src="app/account/reset/request/reset.request.state.js"></script>
     <script src="app/account/reset/request/reset.request.controller.js"></script>
+    <script src="app/account/reset/finish/reset.finish.state.js"></script>
+    <script src="app/account/reset/finish/reset.finish.controller.js"></script>
     <script src="app/services/user/user.service.js"></script>
+    <script src="app/layouts/unauthenticated/unauthenticated.state.js"></script>
     <script src="app/services/auth/sessions.service.js"></script>
     <script src="app/services/auth/register.service.js"></script>
     <script src="app/services/auth/principal.service.js"></script>
@@ -81,10 +84,16 @@
     <script src="app/services/auth/auth.service.js"></script>
     <script src="app/services/auth/activate.service.js"></script>
     <script src="app/services/auth/account.service.js"></script>
-    <script src="app/layouts/unauthenticated/unauthenticated.state.js"></script>
+    <script src="app/layouts/pageTop/pageTop.directive.js"></script>
     <script src="app/layouts/navbar/navbar.controller.js"></script>
     <script src="app/layouts/navbar/active-link.directive.js"></script>
-    <script src="app/layouts/pageTop/pageTop.directive.js"></script>
+    <script src="app/entities/shift/shift.state.js"></script>
+    <script src="app/entities/shift/shift.service.js"></script>
+    <script src="app/entities/shift/shift.search.service.js"></script>
+    <script src="app/entities/shift/shift.controller.js"></script>
+    <script src="app/entities/shift/shift-dialog.controller.js"></script>
+    <script src="app/entities/shift/shift-detail.controller.js"></script>
+    <script src="app/entities/shift/shift-delete-dialog.controller.js"></script>
     <script src="app/layouts/error/error.state.js"></script>
     <script src="app/layouts/contentTop/contentTop.directive.js"></script>
     <script src="app/layouts/baSidebar/baSidebarHelpers.directive.js"></script>
@@ -122,13 +131,6 @@
     <script src="app/entities/store/store-dialog.controller.js"></script>
     <script src="app/entities/store/store-detail.controller.js"></script>
     <script src="app/entities/store/store-delete-dialog.controller.js"></script>
-    <script src="app/entities/shift/shift.state.js"></script>
-    <script src="app/entities/shift/shift.service.js"></script>
-    <script src="app/entities/shift/shift.search.service.js"></script>
-    <script src="app/entities/shift/shift.controller.js"></script>
-    <script src="app/entities/shift/shift-dialog.controller.js"></script>
-    <script src="app/entities/shift/shift-detail.controller.js"></script>
-    <script src="app/entities/shift/shift-delete-dialog.controller.js"></script>
     <script src="app/entities/rota/rota.state.js"></script>
     <script src="app/entities/rota/rota.service.js"></script>
     <script src="app/entities/rota/rota.search.service.js"></script>
@@ -160,24 +162,24 @@
     <script src="app/admin/metrics/metrics.service.js"></script>
     <script src="app/admin/metrics/metrics.modal.controller.js"></script>
     <script src="app/admin/metrics/metrics.controller.js"></script>
-    <script src="app/admin/logs/logs.state.js"></script>
-    <script src="app/admin/logs/logs.service.js"></script>
-    <script src="app/admin/logs/logs.controller.js"></script>
+    <script src="app/admin/audits/audits.state.js"></script>
+    <script src="app/admin/audits/audits.service.js"></script>
+    <script src="app/admin/audits/audits.controller.js"></script>
     <script src="app/admin/health/health.state.js"></script>
     <script src="app/admin/health/health.service.js"></script>
     <script src="app/admin/health/health.modal.controller.js"></script>
     <script src="app/admin/health/health.controller.js"></script>
+    <script src="app/admin/logs/logs.state.js"></script>
+    <script src="app/admin/logs/logs.service.js"></script>
+    <script src="app/admin/logs/logs.controller.js"></script>
     <script src="app/admin/docs/docs.state.js"></script>
     <script src="app/admin/configuration/configuration.state.js"></script>
     <script src="app/admin/configuration/configuration.service.js"></script>
     <script src="app/admin/configuration/configuration.controller.js"></script>
-    <script src="app/admin/audits/audits.state.js"></script>
-    <script src="app/admin/audits/audits.service.js"></script>
-    <script src="app/admin/audits/audits.controller.js"></script>
-    <script src="app/account/settings/settings.state.js"></script>
-    <script src="app/account/settings/settings.controller.js"></script>
     <script src="app/account/sessions/sessions.state.js"></script>
     <script src="app/account/sessions/sessions.controller.js"></script>
+    <script src="app/account/settings/settings.state.js"></script>
+    <script src="app/account/settings/settings.controller.js"></script>
     <script src="app/account/register/register.state.js"></script>
     <script src="app/account/register/register.controller.js"></script>
     <script src="app/account/password/password.state.js"></script>

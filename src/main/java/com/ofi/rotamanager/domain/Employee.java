@@ -42,8 +42,7 @@ public class Employee implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Min(value = 8)
-    @Max(value = 8)
+    @Digits(integer = 8, fraction = 0)
     @Column(name = "phone_number")
     private Integer phoneNumber;
 
@@ -51,7 +50,7 @@ public class Employee implements Serializable {
     @Column(name = "picture")
     private byte[] picture;
 
-    @Column(name = "picture_content_type")    
+    @Column(name = "picture_content_type")
     private String pictureContentType;
 
     @Column(name = "hired_date")

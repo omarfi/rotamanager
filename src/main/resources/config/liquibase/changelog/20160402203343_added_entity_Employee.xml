@@ -64,5 +64,13 @@
                                  constraintName="fk_store_employees_store_id"
                                  referencedColumnNames="id"
                                  referencedTableName="employee"/>
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/employees.csv"
+                  separator=";"
+                  tableName="employee">
+            <column name="hired_date" type="DATE"/>
+        </loadData>
+
     </changeSet>
 </databaseChangeLog>

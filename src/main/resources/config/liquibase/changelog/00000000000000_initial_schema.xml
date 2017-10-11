@@ -116,6 +116,7 @@
             <column name="activated" type="boolean"/>
             <column name="created_date" type="timestamp"/>
         </loadData>
+
         <dropDefaultValue tableName="t_user" columnName="created_date" columnDataType="datetime"/>
 
         <loadData encoding="UTF-8"

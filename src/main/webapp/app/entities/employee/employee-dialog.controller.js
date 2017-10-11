@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -7,13 +7,13 @@
 
     EmployeeDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Employee', 'Shift', 'Store'];
 
-    function EmployeeDialogController ($scope, $stateParams, $uibModalInstance, DataUtils, entity, Employee, Shift, Store) {
+    function EmployeeDialogController($scope, $stateParams, $uibModalInstance, DataUtils, entity, Employee, Shift, Store) {
         var vm = this;
         vm.employee = entity;
         vm.shifts = Shift.query();
         vm.stores = Store.query();
-        vm.load = function(id) {
-            Employee.get({id : id}, function(result) {
+        vm.load = function (id) {
+            Employee.get({id: id}, function (result) {
                 vm.employee = result;
             });
         };
@@ -33,11 +33,16 @@
             if (vm.employee.id !== null) {
                 Employee.update(vm.employee, onSaveSuccess, onSaveError);
             } else {
+                DataUtils.toBase64(vm.employee.file, function(base64Data) {
+                    $scope.$apply(function() {
+                        vm.employee.file = base64Data;
+                    });
+                });
                 Employee.save(vm.employee, onSaveSuccess, onSaveError);
             }
         };
 
-        vm.clear = function() {
+        vm.clear = function () {
             $uibModalInstance.dismiss('cancel');
         };
 
@@ -47,21 +52,35 @@
             if ($file && $file.$error === 'pattern') {
                 return;
             }
+
             if ($file) {
-                DataUtils.toBase64($file, function(base64Data) {
-                    $scope.$apply(function() {
-                        employee.picture = base64Data;
-                        employee.pictureContentType = $file.type;
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function ($scope) {
+                        vm.uncroppedImg = evt.target.result;
                     });
-                });
+                };
+                reader.readAsDataURL($file);
+
+                employee.pictureContentType = $file.type;
             }
+
+            /*
+             DataUtils.toBase64($file, function(base64Data) {
+             $scope.$apply(function() {
+             console.log("doing its stuff");
+             vm.uncroppedImg = base64Data;
+             employee.pictureContentType = $file.type;
+             });
+             });
+             }*/
         };
         vm.datePickerOpenStatus.hiredDate = false;
 
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
 
-        vm.openCalendar = function(date) {
+        vm.openCalendar = function (date) {
             vm.datePickerOpenStatus[date] = true;
         };
     }
